@@ -1,16 +1,9 @@
-var l = console.log.bind(console)
-var t = console.table.bind(console)
+const items = [
+    {name: "book1"},
+    {name: "book2 databases manager"}
+]
 
-f1()
-function f1(){
-    t("hi")
-}
-
-f2()
-var f2 = function(){
-    l("2")
-}
-
-l("h7")
+var search = items.some( x => x.name === 'book1 databases manager' )
+console.log(search) // fa
 
 

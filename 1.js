@@ -3,7 +3,15 @@ CHEAT SHEET js
 trim recortar
 slice cortar
 bind unir
+
+DEFINITIONS
+function Expression
+function Declarations
+function(argument)
+argument.method
+parameters
 */
+
 var l = console.log.bind(console)
 var t = console.table.bind(console)
 
@@ -280,3 +288,155 @@ var f2 = function(){
     l("two")
 }
 f2()    // Function Expression
+
+l("___ DEFINITION ___")
+l("___ METHODS, FUNCTIONS, ARGUMENT, PARAMETRES, OBJECT PROPERTIES___")
+var num1 = "10"
+l(parseInt(num1))  // function(argument)
+l(num1.toString)   // argument.method
+function sum(a,b){l(a+b)} // a, b = parameters  
+sum(2,3)            // 2, 3 = arguments
+
+const player = {
+    play: function(id){ // play = object property
+        console.log(`play track ${id}`)
+    },
+    pause: function(id){
+        console.log(`pause track ${id}`)
+    },
+    stop: function(id){
+        console.log(`stop track ${id}`)
+    }
+}
+
+player.play(1) // method property
+player.stop(30)
+player.pause(5)
+
+
+
+l("___ FUNCTION - Default value___")
+function wellcome(name, lastname="incomplete"){
+    l(`Hi ${name} ${lastname}`)
+}
+wellcome("jhon", "") // Hi jhon incomplete
+
+
+
+l("___ FUNCTION - 3 simplified Arrow functions ___")
+var cart = [
+    {name: 'book1'},
+    {name: 'book2'}
+]
+
+var total1 = cart.map(function(x){
+    console.log(`${x.name}`)
+})
+
+var total2 = cart.map((x)=>{
+    console.log( `${x.name}`)
+})
+
+var total3 = cart.map(x => console.log(`${x.name}`))
+
+
+l("___ FUNCTION - minimun Arrow functions ___")
+const prayer1 = {
+    play: id => l(`play ${id}`),
+    pause: () => l(`paused`),
+    stop: id => l(`stop ${id}`)
+}
+
+player.play(1)
+player.pause()
+player.stop(1)
+
+l("___ FUNCTION - GETTER SETTER ___")
+
+var prayer = {
+    play: id => console.log(`play ${id}`),
+
+set setTrack(id){
+    this.id = id
+},
+get getTrack(){
+    console.log(`${this.id}`)
+}
+}
+prayer.setTrack = 20
+prayer.getTrack
+
+
+
+l("___ TERNARY NESTED ___")
+var username = true
+var password = false
+l(`__ ternary __`)
+ l((username ? password ? 'ok user & passw ' : 'ko passw ': 'SingIn'))
+
+l(`__ no ternary __`)
+if(username){
+    if(password){
+        l(`ok user $ pass`)
+    }
+    else{
+        l(`ko passw`)
+    }
+} else{
+    l(`SingIn`)
+}
+
+
+l(`__ ITERATOR - break VS continue__`)
+// break = stop all execution loop
+// continue = stop execution on point but still working the loop
+for(let i=0; i<10; i++){ 
+    l(`${i}`)
+    if(i === 5){
+        continue // replace by break and the loop will stop on num 5.
+        l(`five `) 
+    }
+}
+
+
+l(`___ ITERATOR ___`)
+var cart = [
+    {name: "book1"},
+    {name: "book2", discount: true},
+    {name: "book3"}
+]
+
+for(let i=0; i<cart.length; i++){
+    cart[i].discount ? console.log(`${cart[i].name} discount`):console.log(`${cart[i].name}`)
+}
+
+
+l(`___ ITERATOR - FOREACH, MAP, OF, IN___`)
+// map create a new array and forEach NO
+var items = ['book1', 'book2']
+cart.forEach(items => console.log(items))
+cart.map(items => console.log(items))
+for( var item of items){ l(item)}
+for( var item in items){l(item)}
+
+l(`___ ITERATOR - IN OBJECT___`)
+
+var items = {
+    name: 'book1',
+    price: 10
+}
+for(var item in items){ //show key
+    console.log(item) 
+}
+for(var item in items){ //show value
+    console.log(`${items[item]}`)
+}
+
+
+l(`___ ITERATOR - NEW EMACS7___`)
+for(var[key,value] of Object.entries(items)){ l(value) }
+
+
+
+l(`___ ARRAY METHODs n___`)
+
