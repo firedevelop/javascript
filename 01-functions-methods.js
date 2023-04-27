@@ -3,18 +3,50 @@ CHEAT SHEET js
 trim recortar
 slice cortar
 bind unir
+*/
 
-DEFINITIONS
+
+var l = console.log.bind(console)
+var t = console.table.bind(console)
+
+l("___ DEFINITION ___")
+/*DEFINITIONS
 function Expression
 function Declarations
 function(argument)
 argument.method
 parameters
+Array Object
 */
+var num1 = "10"
+l(parseInt(num1))  // function(argument)
+l(num1.toString)   // argument.method
+function sum(a,b){l(a+b)} // a, b = parameters  
+sum(2,3)            // 2, 3 = arguments
 
-var l = console.log.bind(console)
-var t = console.table.bind(console)
+const player = {
+    play: function(id){ // play = object property
+        console.log(`play track ${id}`)
+    },
+    pause: function(id){
+        console.log(`pause track ${id}`)
+    },
+    stop: function(id){
+        console.log(`stop track ${id}`)
+    }
+}
 
+player.play(1) // method property
+player.stop(30)
+player.pause(5)
+
+// Array object:
+var items = [
+    {name: "book1"},
+    {name: "book2"}
+]
+
+l(`___ END DEFINITIONS ____`)
 const user = "    Jhon Smith "
 var num = 2
 var num3 = "3"
@@ -289,29 +321,7 @@ var f2 = function(){
 }
 f2()    // Function Expression
 
-l("___ DEFINITION ___")
-l("___ METHODS, FUNCTIONS, ARGUMENT, PARAMETRES, OBJECT PROPERTIES___")
-var num1 = "10"
-l(parseInt(num1))  // function(argument)
-l(num1.toString)   // argument.method
-function sum(a,b){l(a+b)} // a, b = parameters  
-sum(2,3)            // 2, 3 = arguments
 
-const player = {
-    play: function(id){ // play = object property
-        console.log(`play track ${id}`)
-    },
-    pause: function(id){
-        console.log(`pause track ${id}`)
-    },
-    stop: function(id){
-        console.log(`stop track ${id}`)
-    }
-}
-
-player.play(1) // method property
-player.stop(30)
-player.pause(5)
 
 
 
@@ -438,5 +448,74 @@ for(var[key,value] of Object.entries(items)){ l(value) }
 
 
 
-l(`___ ARRAY METHODs n___`)
+l(`___ ARRAY METHOD - SEARCH - .includes ___`)
+// only work in array simple but not in array objects
+var simpleArray = ['January', 'Febrary', 'March']
+var search = simpleArray.includes('March')
+console.log(search)
 
+l(`___ ARRAY METHOD - SEARCH - .some with arrow function___`)
+var items = [
+    {name: "book1"},
+    {name: "book2 databases manager"}
+]
+var search = items.some( x => x.name === 'book1' )
+console.log(search) // true
+
+
+l(`___ ARRAY METHOD - SEARCH - forEach ___`)
+var items = [
+    {name: 'book1', price: 10},
+    {name: 'book2', price: 20},
+    {name: 'book3', price: 30}
+]
+  
+  items.forEach((x, i) => {
+      console.log(x.name, i)
+  })
+  let total = 0
+  items.forEach (x => total += x.price)
+  console.log(total)
+
+  l(`___ ARRAY METHOD - SEARCH - findIndex ___`)
+// output -1 = not found
+// output 1 = found it!
+// findIndex SHOW YOU THE FIRST RESULT
+
+var search = items.findIndex( x => x.name === 'book2')
+l(search) // 1
+
+
+l(`___ ARRAY METHOD - SEARCH - filter ___`)
+var search = items.filter( x => x.price <20 )
+l(search) // special feature, create a new array with the result elements
+var search = items.filter( x => x.name !== 'book1' )
+l(search) // book1, book2
+
+
+l(`___ ARRAY METHOD - SEARCH - find ___`)
+var search = items.find( x => x.name !== 'book1' )
+l(search) 
+
+l(`___ ARRAY METHOD - SEARCH - every ___`)
+// All objects need to match with the request search, if only one don't match the result will be false.
+var search = items.every ( x => x.price > 5 )
+console.log(search)
+
+
+l(`___ ARRAY METHOD - SEARCH - concat and Spread`)
+// programación funcional. The original array is not modified. If you want modify the original use a.push('May')
+var a = [ 'January', 'Febrary']
+var b = ['March']
+var c = ['April']
+
+
+var merge = a.concat(b,c,'extras')
+l(merge)
+
+var merge = [...a, ...b, ...c, 'extras']
+l(merge)
+
+var book4 = { name: 'book4', price: 40 }
+var merge = [...items, book4]
+l(merge)

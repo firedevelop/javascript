@@ -1,9 +1,12 @@
-const items = [
-    {name: "book1"},
-    {name: "book2 databases manager"}
+var items = [
+    {name: 'book1', price: 10},
+    {name: 'book2', price: 20},
+    {name: 'book3', price: 30}
 ]
 
-var search = items.some( x => x.name === 'book1 databases manager' )
-console.log(search) // fa
+var a = [ 'January', 'Febrary']
+var b = ['March']
+var c = ['April']
 
-
+var merge = a.concat(b,c)
+console.log(merge)
