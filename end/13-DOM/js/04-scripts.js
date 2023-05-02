@@ -10,7 +10,7 @@ console.log(card);
 
 // al ser una sintaaxis tipo CSS puedes utilizar selectores más especificos...
 
-const info = document.querySelector('.premium .info');
+const info =  document.querySelector('.premium .info');
 console.log(info);
 
 // Seleccionar el segundo card... de hospedaje

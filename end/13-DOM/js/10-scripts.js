@@ -50,11 +50,11 @@ parrafo3.textContent = '$800 por pesrona';
 parrafo3.classList.add('precio');
 
 // crear el div...
-const info = document.createElement('div');
-info.classList.add('info');
+const info = document.createElement('div')
+info.classList.add('info')
 info.appendChild(parrafo1)
 info.appendChild(parrafo2)
-info.appendChild(parrafo3);
+info.appendChild(parrafo3)
 
 
 // Vamos a crear la imagen
@@ -78,3 +78,6 @@ contenedor.appendChild(card); // al inicio info
 
 console.log(parrafo1);
 console.log(parrafo2);
+
+ 
+

@@ -8,9 +8,9 @@ const encabezado = document.querySelector('.contenido-hero h1');
 // console.log(encabezado);
 
 // Si deseas acceder al texto hay 3 formas de hacerlo...
-console.log(encabezado.innerText); 
-console.log(encabezado.textContent);
-console.log(encabezado.innerHTML);
+console.log(encabezado.innerText); // solo el texto. es sensible al CSS visibility:hidden. Si se pone esta etiqueta de CSS no se verá el texto en consola.
+console.log(encabezado.textContent); // solo texto. NO es sensible al CSS visibility:hidden
+console.log(encabezado.innerHTML); // texto y HTML
 
 // Cual es la diferencia entre estas 3... bueno, si le ponemos a ese elemento visibility: hidden; en el CSS, 
 

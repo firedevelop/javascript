@@ -22,3 +22,5 @@ console.log(formularios); // Puedes ver quue eso si funciona, sin embargo recuer
 // Si un selector no existe, 
 const noExiste = document.querySelectorAll('#no-existe');
 console.log(noExiste);
+
+var head = document.querySelector('.contenido-hero h1').textContent

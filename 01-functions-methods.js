@@ -46,6 +46,13 @@ var items = [
     {name: "book2"}
 ]
 
+
+// event is the name on this anonimous function
+button.addEventListener('input', (event) => {
+    if(a){
+        console.log('')
+    }
+})
 l(`___ END DEFINITIONS ____`)
 const user = "    Jhon Smith "
 var num = 2

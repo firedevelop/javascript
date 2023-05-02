@@ -3,7 +3,7 @@
 
 // tenemos un formulario 
 
-const busqueda = document.querySelector('.busqueda');
+var busqueda = document.querySelector('.busqueda');
 
 // busqueda.addEventListener('input', () => {
 //     console.log('escribiendo...');
@@ -44,3 +44,9 @@ function leerInput(e) {
     console.log(e.target.value) // lo que el usuario escribe...
 
 }
+
+busqueda.addEventListener('input', (e)=> {
+    if(e.target.value === ''){
+        console.log('fallo la validacion')
+    }
+})

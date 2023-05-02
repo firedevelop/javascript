@@ -16,7 +16,7 @@ formulario.addEventListener('submit', e => {
 
     // Crear consultas Ajax entre otras cosas
 
-    console.log('enviando...');
+console.log('enviando...');
 
 
     // Mucha información valiosa en este e...

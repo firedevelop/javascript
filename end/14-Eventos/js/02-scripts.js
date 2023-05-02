@@ -24,4 +24,4 @@ nav.addEventListener('mouseout', () => {
 // click - similar, de hecho es probablemente el más utilizado..
 // dbclick - doble click como cuando quieres abrir un archivo
 // mouseup - al soltar
-// 
+//  

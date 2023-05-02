@@ -1,4 +1,4 @@
-// En JavaScript también es posible cambiar el CSS de un elemento, o agregar o quitar classes...
+ // En JavaScript también es posible cambiar el CSS de un elemento, o agregar o quitar classes...
 
 // Vamos a cambiar el color de texto del h1
 
@@ -19,13 +19,9 @@ console.log(heading.style);
 const card = document.querySelector('.card');
 console.log(card);
 console.log(card.classList); // Classlist nos permitirá listar las classes
-card.classList.add('nueva-clase'); // te permitirá añadir una clase.. // si deseas añadir múltiples classes debes agregar una coma en cada una
+card.classList.add('nueva-clase'); // te permitirá añadir una clase... // si deseas añadir múltiples classes debes agregar una  coma en cada una
 
 // ahora si deseas eliminar una clase utilizas.remove
 card.classList.remove('card'); // de la misma forma si deseas remover múltiples classes tendrías que hacerlo agregando una coma
-
-
-
-
 
 // Con esto te puedes ir dando una idea de todo lo que es posible hacer con JavaScript...

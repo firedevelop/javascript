@@ -8,9 +8,17 @@ console.log(navegacion);
 
 // Cada elemento en la navegación los diferentes elementos se les conoce como Nodos... y podrás listarlos de la siguiente forma...
 console.log(navegacion.childNodes);
-
+// output:
+// text
+// a
+// text
+// a
+//...
 // también existe algo llamado Children
 console.log(navegacion.children)
+//a
+//a
+//...
 
 // La diferencia es que childNodes te va a mostrar hasta los espacios en blanco, children te muestra solo los elementos...
 
@@ -41,6 +49,7 @@ console.log(card.children);
 console.log(card.children[1]);
 
 // Si quieres accedera  los elementos hijos de ese info... recuerda puedes anidar las propiedades.
+console.log(card.children[1].children);
 console.log(card.children[1].children[1]);
 
 // Acceder al titulo
@@ -77,7 +86,6 @@ console.log(navegacion.firstElementChild);
 
 // Cambiar el primer texto...
 navegacion.firstElementChild.textContent = 'Nuevo Enlace...'
-+
 
 
 
@@ -85,7 +93,7 @@ navegacion.firstElementChild.textContent = 'Nuevo Enlace...'
 
 
 // vamos a seleccionar el primer enlace...
-const enlace = document.querySelector('a');
+var enlace = document.querySelector('a');
 console.log(enlace);
 
 
