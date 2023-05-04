@@ -14,6 +14,5 @@ link.href = '/go'
 var li = document.querySelector('.li')
 li.insertBefore(link, li.children[3])
 
-var link2 = 
 var li2 = document.querySelector('.li')
 li2.insertBefore(link, li2.children[1])

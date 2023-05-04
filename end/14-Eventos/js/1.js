@@ -1,1 +1,0 @@
-var x = document.querySelector('.search', (e)=> console.log(e.target))

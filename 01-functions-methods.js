@@ -17,6 +17,8 @@ function(argument)
 argument.method
 parameters
 Array Object
+event
+object property
 */
 var num1 = "10"
 l(parseInt(num1))  // function(argument)
@@ -53,6 +55,11 @@ button.addEventListener('input', (event) => {
         console.log('')
     }
 })
+
+// image is an object property
+const x = {
+    image : document.querySelector('')
+}
 l(`___ END DEFINITIONS ____`)
 const user = "    Jhon Smith "
 var num = 2

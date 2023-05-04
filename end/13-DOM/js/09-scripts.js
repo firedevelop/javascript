@@ -24,4 +24,4 @@ const navegacion = document.querySelector('.navegacion');
 const borrar = navegacion.children[2]
 navegacion.removeChild(borrar);
 
-// Como resumen recuerda hay 2 formas de eliminar elementos, uno es por el elemento por si mismo y el otro requiere el padre y la referencia del hijo..
+// Como resumen recuerda hay 2 formas de eliminar elementos, uno es por el elemento por si mismo y el otro requiere el padre y la referencia del hijo...
