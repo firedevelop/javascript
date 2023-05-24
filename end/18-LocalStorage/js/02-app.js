@@ -1,4 +1,4 @@
-// En este video veamos como obtener lo sdatos de Local storage
+ // En este video veamos como obtener lo sdatos de Local storage
 
 const nombre = localStorage.getItem('nombre');
 console.log(nombre);

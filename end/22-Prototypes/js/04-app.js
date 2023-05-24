@@ -1,9 +1,7 @@
-
-
 function Cliente(nombre, saldo) {
     this.nombre = nombre;
     this.saldo = saldo;
-}
+} 
 
 // Obtener Tipo de Cliente
 Cliente.prototype.tipoCliente = function()  { // Con prototypes tienes que utilizar function, function buscara en el mismo objeto mientras que un arrow function irá hacia la ventana global marcandote un undefined
@@ -44,22 +42,22 @@ pedro.retiraSaldo(2000);
 console.log ( pedro.nombreClienteSaldo());
 
 
-// NUEVO: Heredar Prototypes
+// NUEVO: Heredar Prototypesw
 
 
 
 // Crear 2 objetos nuevos...
 function Persona(nombre, saldo, telefono) {
-    // this.nombre = nombre;
-    // this.saldo = saldo;
-    // this.telefono = telefono;
+    // this.nombre = nombre
+    // this.saldo = saldo
+    // this.telefono = telefono
 
     // Debe ser:
-    Cliente.call(this, nombre, saldo);
+    Cliente.call(this, nombre, saldo);  // this.nombre, this.saldo
     this.telefono = telefono;
 }
 
-// Heredar la función ( Antes de Instanciarlo )
+// Heredar la función ( Antes de Instanciarlo ). Pasamos todo el prototype de Cliente a Persona
 Persona.prototype = Object.create( Cliente.prototype );
 
 // Heredar el constructor

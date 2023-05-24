@@ -19,9 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
     inputEmail.addEventListener('input', validar);
     inputAsunto.addEventListener('input', validar);
     inputMensaje.addEventListener('input', validar);
-
     formulario.addEventListener('submit', enviarEmail);
-
     btnReset.addEventListener('click', function(e) {
         e.preventDefault();
         resetFormulario();
@@ -39,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             resetFormulario();
 
-            // Crear una alerta
+            // Crear una alerta.
             const alertaExito = document.createElement('P');
             alertaExito.classList.add('bg-green-500', 'text-white', 'p-2', 'text-center', 'rounded-lg', 'mt-10', 'font-bold', 'text-sm', 'uppercase');
             alertaExito.textContent = 'Mensaje enviado correctamente';
@@ -53,9 +51,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function validar(e) {
+        // trim delete whitespaces
         if(e.target.value.trim() === '') {
             mostrarAlerta(`El Campo ${e.target.id} es obligatorio`, e.target.parentElement);
+            // in some cases the validation is not reset, here we reset the Object literal formEmail
             email[e.target.name] = '';
+            // necesitamos volver a comprobarFormEmail el email pues en algun escenario mostrarAlerta se sigue mostrando aún el campo email esta vacio.
             comprobarEmail();
             return;
         }
@@ -80,6 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
         limpiarAlerta(referencia);
         
         // Generar alerta en HTML
+        // recommendation create html element in capital letters
         const error = document.createElement('P');
         error.textContent = mensaje;
         error.classList.add('bg-red-600', 'text-white', 'p-2', 'text-center');
@@ -103,9 +105,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function comprobarEmail() {
-        if(Object.values(email).includes('')) {
+        if(Object.values(email).includes('')) {     // Este codigo toma todos los valores del objeto y los asigna al array formEmail y .includes se encarga de buscar si al menos unos de los valores guardados en el array formEmail contiene un string vacio. Returning FALSE = not empty fileds. TRUE = empty
             btnSubmit.classList.add('opacity-50');
-            btnSubmit.disabled = true;
+            btnSubmit.disabled = true;      // disabled is a html button attribute
             return
         } 
         btnSubmit.classList.remove('opacity-50');

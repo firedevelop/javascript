@@ -1,6 +1,6 @@
 // Variables
-const listaTweets = document.querySelector('#lista-tweets');
 const formulario = document.querySelector('#formulario');
+const listaTweets = document.querySelector('#lista-tweets');
 let tweets = [];
 
 // Event Listeners
@@ -15,7 +15,7 @@ function eventListeners() {
 
      // Contenido cargado
      document.addEventListener('DOMContentLoaded', () => {
-          tweets = JSON.parse( localStorage.getItem('tweets') ) || []  ;
+          tweets = JSON.parse( localStorage.getItem('tweets') ) || []  ; // If value is null, when we call to the conditional tweets.length on function "crearHTML" will get and Error to prevent this error we add || [] it is like create an empty array if the value is null. Then first JSON.parse try to find the values "OR ||" if can't find get emtpy "[]" value.
           console.log(tweets);
           crearHTML();
      });
@@ -28,9 +28,9 @@ function agregarTweet(e) {
      const tweet = document.querySelector('#tweet').value;
      
      // validación
-     if(tweet === '') {
+     if(tweet === '') {   // You need to use 3 equals. If you only use 2 equals "==" the user can insert white spaces and the doesn't show error message
           mostrarError('Un mensaje no puede ir vacio');
-          return;
+          return; // break execution and leave to the funcion. If not the execution still running
      }
 
      // Crear un objeto Tweet
@@ -49,49 +49,6 @@ function agregarTweet(e) {
      formulario.reset();
 }
 
-function mostrarError(error) {
-     const mensajeEerror = document.createElement('p');
-     mensajeEerror.textContent = error;
-     mensajeEerror.classList.add('error');
-
-     const contenido = document.querySelector('#contenido');
-     contenido.appendChild(mensajeEerror);
-
-     setTimeout(() => {
-          mensajeEerror.remove();
-     }, 3000);
-}
-
-function crearHTML() {
-     limpiarHTML();
-     
-     if(tweets.length > 0 ) {
-          tweets.forEach( tweet =>  {
-               // crear boton de eliminar
-               const botonBorrar = document.createElement('a');
-               botonBorrar.classList = 'borrar-tweet';
-               botonBorrar.innerText = 'X';
-     
-               // Crear elemento y añadirle el contenido a la lista
-               const li = document.createElement('li');
-
-               // Añade el texto
-               li.innerText = tweet.texto;
-
-               // añade el botón de borrar al tweet
-               li.appendChild(botonBorrar);
-
-               // añade un atributo único...
-               li.dataset.tweetId = tweet.id;
-
-               // añade el tweet a la lista
-               listaTweets.appendChild(li);
-          });
-     }
-
-     sincronizarStorage();
-}
-
 // Elimina el Tweet del DOM
 function borrarTweet(e) {
      e.preventDefault();
@@ -102,9 +59,40 @@ function borrarTweet(e) {
      crearHTML();
 }
 
-// Agrega tweet a local storage
-function sincronizarStorage() {
-     localStorage.setItem('tweets', JSON.stringify(tweets));
+function mostrarError(error) {
+     const mensajeError = document.createElement('p');
+     mensajeError.textContent = error;
+     mensajeError.classList.add('error');
+
+     const contenido = document.querySelector('#contenido');
+     contenido.appendChild(mensajeError);
+
+     // delete the error message after 3 seconds
+     setTimeout(() => {  
+          mensajeError.remove();
+     }, 3000);
+}
+
+function crearHTML() {
+     limpiarHTML();
+     
+     if(tweets.length > 0 ) {
+          tweets.forEach( tweet =>  {
+               const li = document.createElement('li');
+               li.dataset.tweetId = tweet.id;
+               li.innerText = tweet.texto;
+               
+               const botonBorrar = document.createElement('a');
+               botonBorrar.classList = 'borrar-tweet';
+               botonBorrar.innerText = 'X';
+               
+               listaTweets.appendChild(li);
+               li.appendChild(botonBorrar);
+               
+          });
+     }
+
+     sincronizarStorage();
 }
 
 // Elimina los cursos del carrito en el DOM
@@ -113,3 +101,9 @@ function limpiarHTML() {
           listaTweets.removeChild(listaTweets.firstChild);
      }
 }
+
+// Agrega tweet a local storage
+function sincronizarStorage() {
+     localStorage.setItem('tweets', JSON.stringify(tweets));
+}
+

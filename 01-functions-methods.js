@@ -5,7 +5,7 @@ slice cortar
 bind unir
 */
 
-
+l("___  CONSOLE LOG SHORT METHOD ___")
 var l = console.log.bind(console)
 var t = console.table.bind(console)
 
@@ -57,7 +57,7 @@ button.addEventListener('input', (event) => {
 })
 
 // image is an object property
-const x = {
+const x1 = {
     image : document.querySelector('')
 }
 l(`___ END DEFINITIONS ____`)
@@ -218,6 +218,16 @@ l(Object.keys(product))
 l(Object.values(product))
 l(Object.entries(product))
 
+l("___ OBJECT - for ___") 
+var itemDetail = {
+    image: itemElement.querySelector('img').src,
+    title: itemElement.querySelector('b').textContent,
+    price: itemElement.querySelector('.add-to-cart').textContent.slice(2)
+}
+for (var [key, value] of Object.entries(itemDetail)) {
+    console.log(`${key}: ${value}`);
+  }
+
 
 l("________________________") 
 l("___ ARRAYS ___") 
@@ -294,7 +304,7 @@ var product = [
     {name: "book1", price: 10}, 
     {name: "book2", price: 20}
 ]
-
+    
 for(let i=0; i<product.length; i++){
     l(`${product[i].name} - Price: ${product[i].price}`)
 }
@@ -533,3 +543,48 @@ l(merge)
 var book4 = { name: 'book4', price: 40 }
 var merge = [...items, book4]
 l(merge)
+
+
+// We needn't add parentesis on addEvenListener function. otherway the parentesis execute the function and we need execute only when an event occurs.
+x.addEventListener('blur'.validation) // correct
+x.addEventListener('blur'.validation()) // wrong
+
+
+// MANAGER MESSAGE TYPE ERRORS
+// No more magic string, use Symbols
+// freeze prevent modifications
+export const MESSAGE_TYPES = Object.freeze( {
+    ERROR: Symbol(),
+    WARNING: Symbol(),
+    INFO: Symbol()
+})
+
+function messageTypes(type){
+    if(tipo === MESSAGE_TYPES.ERROR){
+        console.error('Error')
+    } else if( type === MESSAGE_TYPES.WARNING){
+        console.warn('Warning')
+    } else if ( type === MESSAGE_TYPES.INFO ){
+        console.info('Information')
+    } else {
+        console.log('message unknow')
+    }
+}
+messageTypes(MESSAGE_TYPES.WARNING)
+
+
+l(`___ TIME DATE ___`)
+var date = new Date()
+console.log(date.getTime())
+console.log(date.getHours())
+console.log(date.getFullYear())     // year = 2023
+console.log(date.setFullYear(2000)) // year = 2000
+
+
+l(`___ OBJECT CONSTRUCTOR___`)
+function Client(name, salary){
+    this.name = name
+    this.salary = salary
+}
+const employee = new Client('jhon',500)
+console.log(employee)
