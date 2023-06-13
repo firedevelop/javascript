@@ -1,12 +1,13 @@
-function customer(name, salary){
+// name, salary, employeeType, taxes, phone, change prototype & constructor
+function contact(name, salary){
     this.name = name
     this.salary = salary
 }
 
-const person = new customer('jhon', 3000)
-const person2 = new customer('mery', 1000)
-
-customer.prototype.customerType = function(){
+var employee = new contact('jhon', 3000)
+var employee = new contact('mery', 1000)
+console.log(employee)
+contact.prototype.employeeType = function(){
     let salaryType
     if(this.salary > 2000){
         salaryType = "Gold"
@@ -17,39 +18,39 @@ customer.prototype.customerType = function(){
     }
     return salaryType
 }
+console.log(employee.employeeType())  // Gold
 
-customer.prototype.customerDetails = function(){
-    return `Name: ${this.name} salaryType: ${this.customerType()}`
+contact.prototype.employeeDetails = function(){
+    return `Name: ${this.name} salaryType: ${this.employeeType()}`
 }
 
-customer.prototype.taxes = function(tax){
+contact.prototype.taxes = function(tax){
    return this.salary -= tax
 }
 
-console.log(person)
-console.log(person.customerType())
-console.log(person.customerDetails())
-console.log(`Name: ${person.customerDetails()} | SalaryTaxes: ${person.taxes(500)}`)
+console.log(employee.employeeDetails())
+console.log(`Name: ${employee.employeeDetails()} | SalaryTaxes: ${employee.taxes(500)}`)
+console.log(employee.name)
 
 // INHERITANCE
 
-function fullDetails(name, salary, phone){
-    customer.call(this, name, salary)
+function fullContact(name, salary, phone){
+    contact.call(this, name, salary)
     this.phone = phone
 }
 
-// ENABLE will set the prototype or/and constructor from customer
-fullDetails.prototype = Object.create(customer.prototype)   // prototype
-fullDetails.prototype.constructor = customer                // constructor
+// ENABLE will set the prototype or/and constructor from "contact"
+fullContact.prototype = Object.create(contact.prototype)   // prototype
+fullContact.prototype.constructor = contact                // constructor
 // end
-const employee3 = new fullDetails('will', 3000, 111222333)
-console.log(employee3)
+var employee = new fullContact('will', 3000, 111222333)
+console.log(employee)
 
 // print only one value
-customer.prototype.showPhone = function(){
+contact.prototype.showPhone = function(){
     return `Phone: ${this.phone}`
 }
-console.log(employee3.showPhone())
+console.log(employee.showPhone())
 
 
 

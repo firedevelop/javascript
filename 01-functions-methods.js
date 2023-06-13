@@ -157,6 +157,10 @@ var {info:{factory: {country}}} = product // China
 l(product.info.factory.country) // China
 l(country)
 
+l("\n___ OBJECT - Object literal nueva mejoria___") 
+var x = {id, name} // merge id and name to x. Opposite to destructing
+var {id, name} = x  // destructing
+
 l("\n___ OBJECT - modify const allowed ___") 
 const catalog = {
     books: "books", 
@@ -164,6 +168,8 @@ const catalog = {
 }
 catalog.price = "25"
 l(catalog.price)
+
+
 
 l("___ USE STRICT ___")
 // "use strict"
@@ -588,3 +594,83 @@ function Client(name, salary){
 }
 const employee = new Client('jhon',500)
 console.log(employee)
+
+l(`___ DATASET___`)
+// both lines do the same
+x.setAttribute('data-id',id)    // old method
+x.dataset.id = id               // most modern-
+
+// output examples
+x.dataset.id            // data-id
+x.dataset.salary.type   // data-salary-type
+
+
+l(`___ OBJECT - read obj outside the function   ___`)
+const a = document.querySelector('#a');
+const b = document.querySelector('#b');
+eventListeners();
+function eventListeners() {
+    a.addEventListener('change', employee);
+    b.addEventListener('change', employee);
+}
+var obj = {
+    a: '',
+    b: ''
+}
+
+
+function employee(e) {
+     obj[e.target.name] = e.target.value;
+}
+
+
+l(`___ SET - faster than object and array   ___`)
+/* FEATURES
+    - faster than object and array
+    - don't allow repeated values
+    - Only values, haven't key:value like object
+    - SET Allow booleans, nums, strings... WEAKSET only allow objects
+.size
+.has
+.delete
+.clear
+.forEach
+*/
+
+l(`___ WEAKSET   ___`)
+/*
+    - WEAKSET only allow objects
+    - doesn't have .size, forEach
+*/
+l(`___ MAP   ___`)
+/*
+    - for add or delete, the map has better performance than object
+*/
+
+l(`___ iterator   ___`)
+/*
+.values
+.entries
+.keys
+*/
+
+l(`___ IIFE - Function Private and call function inmediatly   ___`)
+// keep locally can't call from another file. Keep private function
+(function(){
+    window.name = 'jhon'    // accessible from external file
+    const phone = 123       // private. Not accesible from outside
+
+})()
+
+l(`___ MODULES   ___`)
+/* 
+- Only is allowed one export default per file. Also you can hide the a name fo the default function:
+    export default function(){...}
+    export default function myFunction() {...}
+- you can use alias() JS will understand because only one default is allowed per file.
+- like SQL you can use any alias like:
+    import {users as myAlias()}
+*/
+
+l(`___ MODULES   ___`)
+.

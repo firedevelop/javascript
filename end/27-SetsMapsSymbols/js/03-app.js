@@ -1,4 +1,3 @@
-
 // MAPS
 // Listas ordenadas en llave - valor, donde el tipo y el valor pueden ser cualquier tipo, a diferencia de un objeto puede tener la llave de cualquier tipo de dato...
 
@@ -22,8 +21,8 @@ console.log(cliente.get('saldo'));
 // Tamaño del MAP
 console.log(cliente.size);
 // Contiene un valor
-console.log(cliente.has('tipo'));
-console.log(cliente.get('tipo'));
+console.log(cliente.has('tipo'));   // check if exist
+console.log(cliente.get('tipo'));   // get value
 // Borrar
 cliente.delete('nombre');
 console.log(cliente.has('nombre'));

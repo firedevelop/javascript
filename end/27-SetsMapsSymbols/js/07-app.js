@@ -12,7 +12,7 @@ function *crearGenerador() {
     yield true;
 }
 // Se llaman como funciones normales pero retornan un iterador
-const iterador = crearGenerador();
+var iterador = crearGenerador();
 
 console.log(iterador.next().value);
 console.log(iterador.next().value);

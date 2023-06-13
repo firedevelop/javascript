@@ -3,7 +3,7 @@
 function crearIterador(carrito) {
     let i = 0;
 
-    return {
+    return {    // funcion que retorna otra funcion
         siguiente: () => {
             let fin = (i >= carrito.length);
             let valor = !fin ? carrito[i++] : undefined;

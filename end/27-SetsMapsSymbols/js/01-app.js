@@ -1,9 +1,17 @@
 
-// Creando un Set
+/* Creando un Set
 // Un set te permite crear una lista de valores sin duplicados.
 // Pocas veces los veo que se utilizan, muchas personas prefieren crear arreglos y evitar duplicados, pero sería más sencillo con un set... de hecho en algunas ocasiones termina siendo mejor opción que un arreglo o un objeto...
+ .size
+ .has
+ .delete
+ .clear
+ .forEach
+*/
 
-let carrito = new Set();
+
+
+var carrito = new Set();
 carrito.add('Camisa');
 carrito.add('Disco #1');
 carrito.add('Disco #2');
@@ -13,7 +21,7 @@ console.log(carrito.size);
 
 
 // En un arreglo
-let numeros = new Set([1,2,3,4,5,6,7,3,3,3,3]);
+var numeros = new Set([1,2,3,4,5,6,7,3,3,3,3]);
 console.log(numeros.size);
 
 

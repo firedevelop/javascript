@@ -1,17 +1,8 @@
-
 const mascotaInput = document.querySelector('#mascota');
-const propietarioInput = document.querySelector('#propietario');
-const telefonoInput = document.querySelector('#telefono');
-const fechaInput = document.querySelector('#fecha');
-const horaInput = document.querySelector('#hora');
-const sintomasInput = document.querySelector('#sintomas');
-
-// Contenedor para las citas
-const contenedorCitas = document.querySelector('#citas');
-
-// Formulario nuevas citas
-const formulario = document.querySelector('#nueva-cita')
-formulario.addEventListener('submit', nuevaCita);
+const propiInput = document.querySelector('#propi');
+const formulario = document.querySelector('#formulario')
+const contenedorCitas = document.querySelector('#contenedor-citas');
+const citaObj = { mascota: '', propi: ''}
 
 let editando = false;
 
@@ -20,22 +11,9 @@ let editando = false;
 eventListeners();
 function eventListeners() {
     mascotaInput.addEventListener('change', datosCita);
-    propietarioInput.addEventListener('change', datosCita);
-    telefonoInput.addEventListener('change', datosCita);
-    fechaInput.addEventListener('change', datosCita);
-    horaInput.addEventListener('change', datosCita);
-    sintomasInput.addEventListener('change', datosCita);
+    propiInput.addEventListener('change', datosCita);
+    formulario.addEventListener('submit', nuevaCita);
 }
-
-const citaObj = {
-    mascota: '',
-    propietario: '',
-    telefono: '',
-    fecha: '',
-    hora:'',
-    sintomas: ''
-}
-
 
 function datosCita(e) {
     //  console.log(e.target.name) // Obtener el Input
@@ -58,7 +36,6 @@ class Citas {
         this.citas = this.citas.filter( cita => cita.id !== id);
     }
 }
-
 class UI {
     imprimirAlerta(mensaje, tipo) {
         // Crea el div
@@ -84,36 +61,24 @@ class UI {
         }, 3000);
    }
 
-   imprimirCitas({citas}) { // Se puede aplicar destructuring desde la función...
+   imprimirCitas({citas}) { // destructuring desde la función... | {citas} is a object literal
        
         this.limpiarHTML();
 
         citas.forEach(cita => {
-            const {mascota, propietario, telefono, fecha, hora, sintomas, id } = cita;
+            const {mascota, propi, id } = cita;
 
             const divCita = document.createElement('div');
             divCita.classList.add('cita', 'p-3');
-            divCita.dataset.id = id;
+            divCita.dataset.id = id;    // data-id value on HTML
 
             // scRIPTING DE LOS ELEMENTOS...
-            const mascotaParrafo = document.createElement('h2');
-            mascotaParrafo.classList.add('card-title', 'font-weight-bolder');
-            mascotaParrafo.innerHTML = `${mascota}`;
+            const mascotaLine = document.createElement('h2');
+            mascotaLine.classList.add('card-title', 'font-weight-bolder');
+            mascotaLine.innerHTML = `${mascota}`;
 
-            const propietarioParrafo = document.createElement('p');
-            propietarioParrafo.innerHTML = `<span class="font-weight-bolder">Propietario: </span> ${propietario}`;
-
-            const telefonoParrafo = document.createElement('p');
-            telefonoParrafo.innerHTML = `<span class="font-weight-bolder">Teléfono: </span> ${telefono}`;
-
-            const fechaParrafo = document.createElement('p');
-            fechaParrafo.innerHTML = `<span class="font-weight-bolder">Fecha: </span> ${fecha}`;
-
-            const horaParrafo = document.createElement('p');
-            horaParrafo.innerHTML = `<span class="font-weight-bolder">Hora: </span> ${hora}`;
-
-            const sintomasParrafo = document.createElement('p');
-            sintomasParrafo.innerHTML = `<span class="font-weight-bolder">Síntomas: </span> ${sintomas}`;
+            const propiLine = document.createElement('p');
+            propiLine.innerHTML = `<span class="font-weight-bolder">Propi: </span> ${propi}`;
 
             // Agregar un botón de eliminar...
             const btnEliminar = document.createElement('button');
@@ -129,12 +94,8 @@ class UI {
             btnEditar.innerHTML = 'Editar <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>'
 
             // Agregar al HTML
-            divCita.appendChild(mascotaParrafo);
-            divCita.appendChild(propietarioParrafo);
-            divCita.appendChild(telefonoParrafo);
-            divCita.appendChild(fechaParrafo);
-            divCita.appendChild(horaParrafo);
-            divCita.appendChild(sintomasParrafo);
+            divCita.appendChild(mascotaLine);
+            divCita.appendChild(propiLine);
             divCita.appendChild(btnEliminar)
             divCita.appendChild(btnEditar)
 
@@ -150,28 +111,24 @@ class UI {
 }
 
 const ui = new UI();
-const administrarCitas = new Citas();
+const citas = new Citas();
 
 function nuevaCita(e) {
     e.preventDefault();
 
-    const {mascota, propietario, telefono, fecha, hora, sintomas } = citaObj;
+    const { mascota, propi } = citaObj;
 
     // Validar
-    if( mascota === '' || propietario === '' || telefono === '' || fecha === ''  || hora === '' || sintomas === '' ) {
+    if( mascota === '' || propi === '' ) {
         ui.imprimirAlerta('Todos los mensajes son Obligatorios', 'error')
-
         return;
     }
 
     if(editando) {
         // Estamos editando
-        administrarCitas.editarCita( {...citaObj} );
-
+        citas.editarCita( {...citaObj} );
         ui.imprimirAlerta('Guardado Correctamente');
-
         formulario.querySelector('button[type="submit"]').textContent = 'Crear Cita';
-
         editando = false;
 
     } else {
@@ -181,7 +138,7 @@ function nuevaCita(e) {
         citaObj.id = Date.now();
         
         // Añade la nueva cita
-        administrarCitas.agregarCita({...citaObj});
+        citas.agregarCita({...citaObj});
 
         // Mostrar mensaje de que todo esta bien...
         ui.imprimirAlerta('Se agregó correctamente')
@@ -189,7 +146,7 @@ function nuevaCita(e) {
 
 
     // Imprimir el HTML de citas
-    ui.imprimirCitas(administrarCitas);
+    ui.imprimirCitas(citas);
 
     // Reinicia el objeto para evitar futuros problemas de validación
     reiniciarObjeto();
@@ -202,43 +159,49 @@ function nuevaCita(e) {
 function reiniciarObjeto() {
     // Reiniciar el objeto
     citaObj.mascota = '';
-    citaObj.propietario = '';
-    citaObj.telefono = '';
-    citaObj.fecha = '';
-    citaObj.hora = '';
-    citaObj.sintomas = '';
+    citaObj.propi = '';
 }
 
 
 function eliminarCita(id) {
-    administrarCitas.eliminarCita(id);
-
-    ui.imprimirCitas(administrarCitas)
+    citas.eliminarCita(id);
+    ui.imprimirCitas(citas)
 }
 
 function cargarEdicion(cita) {
 
-    const {mascota, propietario, telefono, fecha, hora, sintomas, id } = cita;
+    const {mascota, propi, id } = cita;
 
     // Reiniciar el objeto
     citaObj.mascota = mascota;
-    citaObj.propietario = propietario;
-    citaObj.telefono = telefono;
-    citaObj.fecha = fecha
-    citaObj.hora = hora;
-    citaObj.sintomas = sintomas;
+    citaObj.propi = propi;
     citaObj.id = id;
 
     // Llenar los Inputs
     mascotaInput.value = mascota;
-    propietarioInput.value = propietario;
-    telefonoInput.value = telefono;
-    fechaInput.value = fecha;
-    horaInput.value = hora;
-    sintomasInput.value = sintomas;
+    propiInput.value = propi;
 
     formulario.querySelector('button[type="submit"]').textContent = 'Guardar Cambios';
 
     editando = true;
-
 }
+
+
+/* ABOUT {citas}
+is like if you do: 
+const citas = new Citas()
+
+When you use the {citas} syntax, you are creating an object literal. An object literal is a way of creating an object without using the new keyword. The citas object is created in the local scope of the function where it is defined.
+
+In the code you provided, the citas object is created in the imprimirCitas() function. The citas object is then passed to the imprimirCitas() function as an argument.
+
+Here is a more detailed explanation of how object literals work:
+
+Object literals are a way of creating objects without using the new keyword.
+Object literals are created using curly braces ({}).
+The properties of an object literal are defined using key-value pairs.
+The keys of an object literal must be strings.
+The values of an object literal can be any JavaScript value.
+*/
+
+

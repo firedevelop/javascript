@@ -1,6 +1,6 @@
 // Wekmap
 
-let key = {userId:1};
+let key = {userId:1}; 
 let key2 = {userId:2};
 let weakmap = new WeakMap();
 

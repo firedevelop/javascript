@@ -1,21 +1,22 @@
 // Variables y Selectores
-const formulario = document.getElementById('agregar-gasto');
-const gastosListado = document.querySelector('#gastos ul');
+const formulario = document.getElementById('formulario');
+const gastosListado = document.querySelector('#gastos-listado ul');
 
 
 // Eventos
 eventListeners();
 function eventListeners() {
-    document.addEventListener('DOMContentLoaded', preguntarPresupuesto);
+    document.addEventListener('DOMContentLoaded', preguntarPre);
     formulario.addEventListener('submit', agregarGasto);
     gastosListado.addEventListener('click', eliminarGasto);
 }
 
+
 // Classes
-class Presupuesto {
-    constructor(presupuesto) {
-        this.presupuesto = Number(presupuesto);
-        this.restante = Number(presupuesto);
+class Pre {
+    constructor(pre) {
+        this.pre = Number(pre); // Number convert a value to number. if cannot NaN is returned
+        this.restante = Number(pre);
         this.gastos = [];
     }
 
@@ -25,20 +26,23 @@ class Presupuesto {
     }
 
     eliminarGasto(id) {
-        this.gastos = this.gastos.filter( gasto => gasto.id.toString() !== id );
+        this.gastos = this.gastos.filter( gasto => gasto.id.toString() !== id );    // gasto.id = 12345
         this.calcularRestante();
     }
 
     calcularRestante() {
-        const gastado = this.gastos.reduce((total, gasto) => total + gasto.cantidad, 0);
-        this.restante = this.presupuesto - gastado;
+        // reduce method sum the gran total. 0 is the initialized value
+        //  gasto.nombre = 'jhon' | gasto.cantidad = ' 
+        // x = accumulator | y = currentValue
+        const gastado = this.gastos.reduce((x, y) => x + y.cantidad, 0);
+        this.restante = this.pre - gastado;
     }
 }
 
 class UI {
-
-    insertarPresupuesto( cantidad ) {
-     document.querySelector('#total').textContent = cantidad.presupuesto;
+    // insertPre = method | cantidad = object | pre and restante = properties
+    insertarPre( cantidad ) {   
+     document.querySelector('#total').textContent = cantidad.pre;
      document.querySelector('#restante').textContent = cantidad.restante;
     }
     
@@ -97,24 +101,24 @@ class UI {
         });
    }
 
-     // Comprueba el presupuesto restante
+     // Comprueba el pre restante
     actualizarRestante(restante) {
         document.querySelector('span#restante').textContent = restante; 
     }
 
-     // Cambia de color el presupuesto restante
-     comprobarPresupuesto(presupuestoObj) {
-        const { presupuesto, restante} = presupuestoObj;
+     // Cambia de color el pre restante
+     comprobarPre(preObj) {
+        const { pre, restante} = preObj;
         const restanteDiv = document.querySelector('.restante');
 
         // console.log(restante);
-        // console.log( presupuesto);
+        // console.log( pre);
 
         // Comprobar el 25% 
-        if( (presupuesto / 4) > restante) {
+        if( (pre / 4) > restante) {
             restanteDiv.classList.remove('alert-success', 'alert-warning');
             restanteDiv.classList.add('alert-danger');
-        } else if( (presupuesto / 2) > restante) {
+        } else if( (pre / 2) > restante) {
             restanteDiv.classList.remove('alert-success');
             restanteDiv.classList.add('alert-warning');
         } else {
@@ -124,7 +128,7 @@ class UI {
 
         // Si presupuesta es igual a 0 
         if(restante <= 0 ) {
-            ui.imprimirAlerta('El presupuesto se ha agotado', 'error');
+            ui.imprimirAlerta('El pre se ha agotado', 'error');
             formulario.querySelector('button[type="submit"]').disabled = true;
         } 
     }
@@ -136,26 +140,26 @@ class UI {
     }
 }
 
-
-
 const ui = new UI();
-let presupuesto;
+let pre;
 
-function preguntarPresupuesto() {
-    const presupuestoUsuario = prompt('¿Cual es tu presupuesto?');
+function preguntarPre() {
+    const preUsuario = prompt('¿Cual es tu pre?', 100);
 
-    if( presupuestoUsuario === '' || presupuestoUsuario === null || isNaN(presupuestoUsuario) || presupuestoUsuario <= 0 ) {
-        window.location.reload();
+    if( preUsuario === '' || preUsuario === null || isNaN(preUsuario) || preUsuario <= 0 ) {
+        window.location.reload();   // recarga ventana actual una y otra vez hasta que el usuario introduzca una cantidad válida.
     }
 
-    // Presupuesto valido
-    presupuesto = new Presupuesto(presupuestoUsuario);
+    // Pre valido
+    pre = new Pre(preUsuario);
 
-    // console.log(presupuesto);
+    // console.log(pre);
 
     // Agregarlo en el HTML
-    ui.insertarPresupuesto(presupuesto)
+    ui.insertarPre(pre)
 }
+
+
 
 
 function agregarGasto(e) {
@@ -177,20 +181,20 @@ function agregarGasto(e) {
             const gasto = { nombre, cantidad, id: Date.now() };
 
             // Añadir nuevo gasto 
-            presupuesto.nuevoGasto(gasto)
+            pre.nuevoGasto(gasto)
 
             // Insertar en el HTML
             ui.imprimirAlerta('Correcto', 'correcto');
 
             // Pasa los gastos para que se impriman...
-            const { gastos} = presupuesto;
+            const {gastos} = pre;   // 
             ui.agregarGastoListado(gastos);
 
             // Cambiar la clase que nos avisa si se va terminando
-            ui.comprobarPresupuesto(presupuesto);
+            ui.comprobarPre(pre);
 
-            // Actualiza el presupuesto restante
-            const { restante } = presupuesto;
+            // Actualiza el pre restante
+            const { restante } = pre;
 
             // Actualizar cuanto nos queda
             ui.actualizarRestante(restante)
@@ -202,13 +206,13 @@ function agregarGasto(e) {
 
 function eliminarGasto(e) {
     if(e.target.classList.contains('borrar-gasto')){
-        const { id } = e.target.parentElement.dataset;
-        presupuesto.eliminarGasto(id);
+        const { id } = e.target.parentElement.dataset;
+        pre.eliminarGasto(id);
         // Reembolsar
-        ui.comprobarPresupuesto(presupuesto);
+        ui.comprobarPre(pre);   // change color CSS based on %
 
         // Pasar la cantidad restante para actualizar el DOM
-        const { restante } = presupuesto;
+        const { restante } = pre;   // const restante = pre.restante; | pre=object, restante=property | Extract restante from pre
         ui.actualizarRestante(restante);
 
         // Eliminar del DOM
