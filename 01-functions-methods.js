@@ -672,5 +672,6 @@ l(`___ MODULES   ___`)
     import {users as myAlias()}
 */
 
-l(`___ MODULES   ___`)
-.
+l(`___ indexDB   ___`)
+// ('you database name', your database version)
+let myIndexDB = window.indexedDB.open('myIndexDB', 1)

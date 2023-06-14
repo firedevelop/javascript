@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 function crmDB() {
-    // crear base de datos con la versión 1
+    // crear base de datos con la versión 1 | crm = name | 1 = your version
     let crmDB = window.indexedDB.open('crm', 1.1);
 
     // si hay un error, lanzarlo
@@ -35,9 +35,11 @@ function crmDB() {
 
         // definir el objectstore, primer parametro el nombre de la BD, segundo las opciones
         // keypath es de donde se van a obtener los indices
+        // increment permite crear campos unicos y correlativos como un ID
         let objectStore = db.createObjectStore('crm', { keyPath: 'crm',  autoIncrement: true } );
 
         //createindex, nombre y keypath, 3ro los parametros, keypath esn este caso sera el indice para poder realizar busquedas
+        // unique false allow multiples fields with same name like 'jhon'
         objectStore.createIndex('nombre', 'nombre', { unique: false } );
         objectStore.createIndex('email', 'email', { unique: true } );
         objectStore.createIndex('telefono', 'telefono', { unique: false } );

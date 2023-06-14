@@ -30,7 +30,6 @@
         crearDB.onupgradeneeded = function(e) {
             // el evento que se va a correr tomamos la base de datos
             const db = e.target.result;
-    
             
             // definir el objectstore, primer parametro el nombre de la BD, segundo las opciones
             // keypath es de donde se van a obtener los indices
@@ -98,7 +97,7 @@
                         </tr>
                     `;
         
-                    cursor.continue();
+                    cursor.continue(); // go to the next
                  } else {
                     //  console.log('llegamos al final...');
                  }
