@@ -1,7 +1,7 @@
 // Fetch API desde una API
 
-const cargarAPIBtn = document.querySelector('#cargarAPI');
-cargarAPIBtn.addEventListener('click', obtenerDatos);
+const buttonAPI = document.querySelector('#buttonAPI');
+buttonAPI.addEventListener('click', obtenerDatos);
 
 
 function obtenerDatos() {

@@ -1,7 +1,10 @@
-// Fetch API desde un JSON (Objeto)
+/* Fetch API desde un JSON (Objeto)
+show employees when user access to the site automatically
+ document.addEventListener('DOMContentLoaded', obtenerDatos)
+*/
 
-const cargarJSONArrayBtn = document.querySelector('#cargarJSONArray');
-cargarJSONArrayBtn.addEventListener('click', obtenerDatos);
+const buttonObject = document.querySelector('#buttonObject');
+buttonObject.addEventListener('click', obtenerDatos);
 
 
 function obtenerDatos() {
@@ -9,9 +12,9 @@ function obtenerDatos() {
         .then( respuesta => {
             return respuesta.json()
         }) 
-        .then(resultado => {
-            mostrarHTML(resultado);
-            console.log(resultado)
+        .then(x => {
+            mostrarHTML(x);
+            console.log(x)
         })
 }
 
@@ -24,8 +27,8 @@ function mostrarHTML(empleados) {
         const { id, nombre, empresa, trabajo} = empleado;
 
         html += `
-            <p>Empleado: ${nombre} </p>
             <p>ID: ${id} </p>
+            <p>Empleado: ${nombre} </p>
             <p>Empresa: ${empresa} </p>
             <p>Trabajo: ${trabajo} </p>
         `

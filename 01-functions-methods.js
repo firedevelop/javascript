@@ -675,3 +675,14 @@ l(`___ MODULES   ___`)
 l(`___ indexDB   ___`)
 // ('you database name', your database version)
 let myIndexDB = window.indexedDB.open('myIndexDB', 1)
+
+l(`___ visibilitychange   ___`)
+// play if you are on the tab o browser, pause if you leave
+document.addEventListener('visibilitychange', ()=> {
+    if(document.visibilityState === 'visible'){
+        console.log('play video')
+    } else {
+        console.log('pause video')
+    }
+})
+

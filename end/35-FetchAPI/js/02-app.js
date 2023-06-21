@@ -1,7 +1,7 @@
 // Fetch API desde un JSON (Array)
 
-const cargarJSONBtn = document.querySelector('#cargarJSON');
-cargarJSONBtn.addEventListener('click', obtenerDatos);
+const buttonJSON = document.querySelector('#buttonJSON');
+buttonJSON.addEventListener('click', obtenerDatos);
 
 
 function obtenerDatos() {
@@ -9,19 +9,28 @@ function obtenerDatos() {
         .then( respuesta => {
             return respuesta.json()
         }) 
-        .then(resultado => {
-            mostrarHTML(resultado);
-            console.log(resultado)
+        .then(x => {
+            mostrarHTML(x);
+            console.log(x)
         })
 }
 
-function mostrarHTML({empresa,  id, nombre, trabajo}) {
+function mostrarHTML({id, empresa, nombre, trabajo}) {
     const contenido = document.querySelector('#contenido');
 
     contenido.innerHTML = `
-        <p>Empleado: ${nombre} </p>
-        <p>ID: ${id} </p>
-        <p>Empresa: ${empresa} </p>
-        <p>Trabajo: ${trabajo} </p>
+        <p>id: ${id} </p>
+        <p>nombre: ${nombre} </p>
+        <p>empresa: ${empresa} </p>
+        <p>trabajo: ${trabajo} </p>
     `
 }
+
+/*
+{
+     "id" : 1,
+     "nombre" : "Juan",
+     "empresa" : "Código Con Juan",
+     "trabajo" : "Desarrollador Web"
+}
+*/

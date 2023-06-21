@@ -92,7 +92,7 @@
             email: emailInput.value,
             empresa: empresaInput.value,
             telefono: telefonoInput.value,
-            id: Number( idCliente )
+            id: Number( idCliente ) // if you don't convert using Number() output will be error
         };
 
         console.log(clienteActualizado)
