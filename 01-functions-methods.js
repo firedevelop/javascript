@@ -485,12 +485,22 @@ var search = simpleArray.includes('March')
 console.log(search)
 
 l(`___ ARRAY METHOD - SEARCH - .some with arrow function___`)
+// return by defaul is not necesary declarate 
 var items = [
     {name: "book1"},
     {name: "book2 databases manager"}
 ]
 var search = items.some( x => x.name === 'book1' )
 console.log(search) // true
+
+l(`___ ARROW FUNCTION COMPARE. Helpers ___`)
+// return by defaul is not necesary declarate
+function kelvinToCentigrados(grados){
+    return parseInt(grados - 273.15)
+}
+// the same above with arrow function
+// se llaman también helpers
+const kelvinToCentigrados2 = (grados) => parseInt(grados - 273.15)
 
 
 l(`___ ARRAY METHOD - SEARCH - forEach ___`)

@@ -9,9 +9,9 @@ function obtenerDatos() {
         .then( respuesta => {
             return respuesta.json()
         }) 
-        .then(resultado => {
-            mostrarHTML(resultado);
-            console.log(resultado)
+        .then(x => {
+            mostrarHTML(x);
+            console.log(x)
         })
 }
 

@@ -1,16 +1,12 @@
-
 const container = document.querySelector('.container');
 const resultado = document.querySelector('#resultado');
 const formulario = document.querySelector('#formulario');
 
 window.addEventListener('load', () => {
-    formulario.addEventListener('submit', buscarClima);
+    formulario.addEventListener('submit', validar);
 })
 
-
-
-
-function buscarClima(e) {
+function validar(e) {
     e.preventDefault();
     const ciudad = document.querySelector('#ciudad').value
     const pais = document.querySelector('#pais').value
@@ -21,7 +17,6 @@ function buscarClima(e) {
     if(ciudad === '' || pais === '') {
         // Hubo un error
         mostrarError('Ambos campos son obligatorios')
-
         return;
     }
     consultarAPI(ciudad, pais );
@@ -46,11 +41,11 @@ function mostrarError(mensaje) {
   }
 }
 
-function consultarAPI(ciudad, pais ) {
+function consultarAPI(ciudad, pais ) {      
         // Consultar la API e imprimir el Resultado...
 
     // leer la url  y agregar el API key
-    const appId = '31b33df22fe2b492d9b74843003438fe';
+    const appId = '8da140cb3d9f98248c233c1461ef5b7f';
     let url = `http://api.openweathermap.org/data/2.5/weather?q=${ciudad},${pais}&appid=${appId}`;
 
     Spinner();
@@ -78,7 +73,7 @@ function mostrarClima(datos) {
 
   // Formatear el Clima...
 
-  const { name, main: { temp, temp_max, temp_min } } = datos;
+  const { name, main: { temp, temp_max, temp_min } } = datos; // destructing. access to Key inside another key
 
 
   const grados = KelvinACentigrados(temp);
@@ -114,7 +109,7 @@ function mostrarClima(datos) {
 }
 
 function KelvinACentigrados(grados) {
-  return parseInt( grados - 273.15);
+  return parseInt( grados - 273.15); // la API nos da grados kelvin y esta resta lo convierte a grados centigrados 
 }
 
 function limpiarHTML() {
