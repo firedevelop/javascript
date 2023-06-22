@@ -45,7 +45,7 @@ function consultarAPI(ciudad, pais ) {
         // Consultar la API e imprimir el Resultado...
 
     // leer la url  y agregar el API key
-    const appId = '8da140cb3d9f98248c233c1461ef5b7f';
+    const appId = '888';
     let url = `http://api.openweathermap.org/data/2.5/weather?q=${ciudad},${pais}&appid=${appId}`;
 
     Spinner();
