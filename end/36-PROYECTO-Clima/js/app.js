@@ -1,7 +1,8 @@
+import 'dotenv/config'
 const container = document.querySelector('.container');
 const resultado = document.querySelector('#resultado');
 const formulario = document.querySelector('#formulario');
-
+// This function will be called when the window has finished loading
 window.addEventListener('load', () => {
     formulario.addEventListener('submit', validar);
 })
@@ -45,7 +46,7 @@ function consultarAPI(ciudad, pais ) {
         // Consultar la API e imprimir el Resultado...
 
     // leer la url  y agregar el API key
-    const appId = '888';
+    const appId = process.env.API;
     let url = `http://api.openweathermap.org/data/2.5/weather?q=${ciudad},${pais}&appid=${appId}`;
 
     Spinner();
@@ -58,7 +59,7 @@ function consultarAPI(ciudad, pais ) {
       .then(datos => {
         console.log(datos);
         limpiarHTML();
-        if(datos.cod === "404") {
+        if(datos.cod === "404") { // cod property of the JSON object that is returned by the fetch() method.
           mostrarError('Ciudad No Encontrada')
         } else {
           mostrarClima(datos)

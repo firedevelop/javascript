@@ -5,6 +5,8 @@ slice cortar
 bind unir
 */
 
+import { table } from "console"
+
 l("___  CONSOLE LOG SHORT METHOD ___")
 var l = console.log.bind(console)
 var t = console.table.bind(console)
@@ -672,7 +674,8 @@ l(`___ IIFE - Function Private and call function inmediatly   ___`)
 
 })()
 
-l(`___ MODULES   ___`)
+l(`___ 
+MODULES ___`)
 /* 
 - Only is allowed one export default per file. Also you can hide the a name fo the default function:
     export default function(){...}
@@ -696,3 +699,72 @@ document.addEventListener('visibilitychange', ()=> {
     }
 })
 
+l(`___ createElement RECOMENDATION ___`)
+// the recomendation is OPTION in capital letter
+const option = document.createElement('OPTION')
+
+l(`_____________________________________`)
+l(`___ REACT - cotizador prestamos ___`)
+/*
+npm create vite@latest
+npm install
+npm run dev
+http://localhost:5173/
+open  a new terminal tab
+cd react2/
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+
+go to file: tailwind.config.cjs
+files to change: /src/main.jsx | tailwind.config.js
+again run server:  npm run dev
+*/
+
+l(`___ REACT   __`)
+https://www.reactjs.wiki/
+https://es.react.dev/learn
+https://github.com/midudev/preguntas-entrevista-react
+
+Online Editor:
+https://codi.link/
+
+
+/* 
+class in React is className because class is reserverd word in JS
+Visual Studio code install extension:   1                
++ Tailwind CSS IntelliSense"
++ ES7+ React/Redux/React-Native snippets
++ Simple React Snippets
+
+JSX es una sintasis que combina JS y HTML. Todos los elementos de HTML se pueden utilizar pero no todas las funciones de JS se pueden usar
+
+Componenete en react usan .js o .jsx
+
+Hooks son las funciones de React como useContext, useEffect, ...
+
+useState es para valores que van a modificarse. Si no cambia ponerlo fijo como CONST NUM = 10
+
+rfce on visual studio code write this to create basic structure
+
+function Button(props){}  'props' esta siempre presente en React lo declares o no.
+
+To render elements use:
+<Header />
+<Button />
+
+ */
+
+l(`___ REACT vs JS __`)
+// on React
+onChange={}
+
+// on JS
+const formulario3 = document.querySelector('.formulario3')
+formulario3.addEventListener('change')
+
+
+
+l(`___ Convert string to number __`)
+console.log(Number(e.target.value))
+console.log(parseInt(e.target.vallue))
+console.log(+e.target.value)

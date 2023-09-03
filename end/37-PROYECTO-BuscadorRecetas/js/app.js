@@ -1,46 +1,44 @@
+document.addEventListener('DOMContentLoaded', iniciarApp);
 function iniciarApp() {
-
-
+    const modal = new bootstrap.Modal('#modal', {});0
     const resultado = document.querySelector('#resultado');
+    const selectCategorias = document.querySelector('#selectCategorias');
 
-    const selectCategorias = document.querySelector('#categorias');
     if(selectCategorias) {
-        selectCategorias.addEventListener('change', seleccionarCategoria)
-        obtenerCategorias();
+        selectCategorias.addEventListener('change', fetchOneCategory)
+        fetchAllCategories();
     }
     const favoritosDiv = document.querySelector('.favoritos');
     if(favoritosDiv) {
         obtenerFavoritos();
     }
 
-    const modal = new bootstrap.Modal('#modal', {});
-
-    
-
-    function obtenerCategorias() {
-        const url = 'https://www.themealdb.com/api/json/v1/1/categories.php';
-        fetch(url)
-            .then(respuesta => respuesta.json())
-            .then( resultado => msotrarCategorias(resultado.categories))
-    }
-
-    function msotrarCategorias(categorias = []) {
-        categorias.forEach( categoria => {
-            const { strCategory } = categoria;
-            const option = document.createElement('OPTION');
-            option.value = strCategory;
-            option.textContent = strCategory;
-            selectCategorias.appendChild(option);     
-        })
-    }
-
-    function seleccionarCategoria(e) {
+    function fetchOneCategory(e) {
         const categoria = e.target.value;
         const url = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${categoria}`;
         fetch(url)
             .then(respuesta => respuesta.json())
             .then(resultado => mostrarRecetas(resultado.meals))
     }
+
+    function fetchAllCategories() {
+        const url = 'https://www.themealdb.com/api/json/v1/1/categories.php';
+        fetch(url)
+            .then( respuesta => respuesta.json() )
+            .then( resultado => mostrarCategorias(resultado.categories) )
+    }
+
+    function mostrarCategorias(categorias = []) {
+        categorias.forEach( categoria => {
+            const { strCategory } = categoria
+            const option = document.createElement('OPTION')
+            option.value = strCategory
+            option.textContent = strCategory
+            selectCategorias.appendChild(option)
+        })
+    }
+
+
 
     function mostrarRecetas(recetas = []) {
 
@@ -54,7 +52,6 @@ function iniciarApp() {
         // Iterar en los resultados
         recetas.forEach(receta => {
             const { idMeal, strMeal, strMealThumb } = receta;
-
             const recetaContenedor = document.createElement('DIV');
             recetaContenedor.classList.add('col-md-4');
 
@@ -179,7 +176,7 @@ function iniciarApp() {
 
     function agregarFavorito(receta) {
         const favoritos = JSON.parse(localStorage.getItem('favoritos')) ?? [];
-        localStorage.setItem('favoritos', JSON.stringify([...favoritos, receta]));
+        localStorage.setItem('favoritos', JSON.stringify([...favoritos, receta])) // actualiza localStorage:
     }
 
     function eliminarFavorito(id) {
@@ -189,7 +186,9 @@ function iniciarApp() {
     }
 
     function existeStorage(id) {
+// si existe el id lo toma de localStorage en caso contrario asigna un array vacio
         const favoritos = JSON.parse(localStorage.getItem('favoritos')) ?? [];
+        // busca si al menos un id coincide
         return favoritos.some(favorito => favorito.id === id);
     }
 
@@ -221,4 +220,3 @@ function iniciarApp() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', iniciarApp);
